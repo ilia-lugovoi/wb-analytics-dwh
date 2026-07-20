@@ -1,0 +1,40 @@
+with source as (
+    select * from {{ source('raw_sources', 'raw_sales') }}
+)
+
+select
+    id,
+    number,
+    cast("date" as timestamp) as date,
+    cast("lastChangeDate" as timestamp) as lastChangeDate,
+    "supplierArticle" as supplier_article,
+    "techSize" as tech_size,
+    cast("barcode" as bigint) as barcode,
+    cast("quantity" as integer) as quantity,
+    cast("totalPrice" as numeric) as total_price,
+    cast("discountPercent" as integer) as discount_percent,
+    cast("isSupply" as boolean) as is_supply,
+    cast("isRealization" as boolean) as is_realization,
+    cast("orderId" as bigint) as order_id,
+    cast("promoCodeDiscount" as numeric) as promo_code_discount,
+    "warehouseName" as warehouse_name,
+    "countryName" as country_name,
+    "oblastOkrugName" as oblast_okrug_name,
+    "regionName" as region_name,
+    cast("incomeID" as bigint) as income_id,
+    "saleID" as sale_id,
+    cast("odid" as bigint) as odid,
+    cast("spp" as numeric) as spp,
+    cast("forPay" as numeric) as for_pay,
+    cast("finishedPrice" as numeric) as finished_price,
+    cast("priceWithDisc" as numeric) as price_with_disc,
+    cast("nmId" as integer) as nm_id,
+    "subject",
+    "category",
+    "brand",
+    case when "IsStorno" = 1 then true else false end as is_storno,
+    "gNumber" as g_number,
+    "sticker",
+    cast("dag_date" as date) as dag_date,
+    "srid"
+from source

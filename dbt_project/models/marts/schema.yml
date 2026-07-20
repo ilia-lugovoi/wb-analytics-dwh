@@ -1,0 +1,154 @@
+version: 2
+
+models:
+  - name: v_orders
+    description: "Витрина с историей заказов Wildberries. Содержит информацию о заказанных позициях, ценах и статусах отмен."
+    columns:
+      - name: odid
+        description: "Уникальный идентификатор позиции в заказе"
+        tests:
+          - not_null
+      - name: date
+        description: "Дата и время создания заказа"
+      - name: barcode
+        description: "Штрихкод номенклатуры товара"
+      - name: nm_id
+        description: "Артикул Wildberries (WB номенклатура)"
+      - name: supplier_article
+        description: "Артикул продавца"
+      - name: subject
+        description: "Предмет/категория товара"
+      - name: brand
+        description: "Бренд товара"
+      - name: category
+        description: "Родительская категория"
+      - name: warehouse_name
+        description: "Название склада отгрузки"
+      - name: oblast
+        description: "Регион/область доставки"
+      - name: quantity
+        description: "Количество заказанных единиц"
+      - name: total_price
+        description: "Полная стоимость до применения скидок"
+      - name: discount_percent
+        description: "Согласованный процент скидки"
+      - name: is_cancel
+        description: "Флаг отмены заказа (1 — отменен, 0 — активен)"
+      - name: cancel_date
+        description: "Дата и время отмены заказа"
+      - name: g_number
+        description: "Номер объявления/глобальный номер заказа"
+
+  - name: v_report_realization
+    description: "Витрина на основе отчетов о реализации. Главный источник для расчета финансовой прибыли и комиссий."
+    columns:
+      - name: rrd_id
+        description: "Уникальный идентификатор строки в отчете реализации"
+        tests:
+          - not_null
+      - name: date
+        description: "Смерженная дата операции (выбирается через coalesce из дат продажи и отчета)"
+      - name: barcode
+        description: "Штрихкод товара"
+      - name: nm_id
+        description: "Артикул Wildberries"
+      - name: gi_id
+        description: "Идентификатор поставки"
+      - name: subject
+        description: "Категория товара"
+      - name: brand
+        description: "Бренд"
+      - name: doc_type_name
+        description: "Тип документа (Продажа / Возврат)"
+      - name: quantity
+        description: "Количество реализованного товара"
+      - name: retail_price
+        description: "Розничная цена товара"
+      - name: retail_amount
+        description: "Сумма продаж в розничных ценах"
+      - name: sale_percent
+        description: "Скидка продавца"
+      - name: commission_percent
+        description: "Процент комиссии маркетплейса"
+      - name: ppvz_sales_commission
+        description: "Вознаграждение WB без НДС"
+      - name: delivery_rub
+        description: "Стоимость логистики/доставки маркетплейсом"
+
+  - name: v_sales
+    description: "Витрина фактов продаж (выкупов товара клиентами)."
+    columns:
+      - name: date
+        description: "Дата и время продажи"
+      - name: barcode
+        description: "Штрихкод товара"
+      - name: nm_id
+        description: "Артикул Wildberries"
+      - name: supplier_article
+        description: "Артикул продавца"
+      - name: subject
+        description: "Предмет/категория товара"
+      - name: brand
+        description: "Бренд"
+      - name: warehouse_name
+        description: "Склад, с которого был продан товар"
+      - name: region_name
+        description: "Регион покупателя"
+      - name: quantity
+        description: "Количество выкупленного товара"
+      - name: total_price
+        description: "Финальная цена продажи"
+      - name: for_pay
+        description: "Сумма к перечислению продавцу"
+      - name: finished_price
+        description: "Фактическая стоимость для покупателя в приложении"
+
+  - name: v_stock
+    description: "Витрина ежедневных остатков товаров на складах WB с детализацией по оборачиваемости."
+    columns:
+      - name: date
+        description: "Дата среза остатков (dag_date)"
+      - name: barcode
+        description: "Штрихкод товара"
+      - name: nm_id
+        description: "Артикул Wildberries"
+      - name: subject
+        description: "Предмет/категория товара"
+      - name: brand
+        description: "Бренд"
+      - name: warehouse_name
+        description: "Название склада хранения"
+      - name: quantity
+        description: "Количество товара, доступное для заказа"
+      - name: quantity_full
+        description: "Полное количество товара на складе (включая зарезервированное)"
+      - name: in_way_to_client
+        description: "Товар в пути к клиенту"
+      - name: in_way_from_client
+        description: "Товар в пути от клиента (возврат)"
+      - name: days_on_site
+        description: "Количество дней, сколько товар находится на сайте/складе"
+
+  - name: v_supplies
+    description: "Витрина принятых и планируемых поставок на склады WB."
+    columns:
+      - name: income_id
+        description: "Номер поставки"
+      - name: date
+        description: "Дата создания/планирования поставки"
+      - name: supply_date
+        description: "Фактическая дата приемки товара на склад"
+      - name: date_close
+        description: "Дата закрытия поставки"
+      - name: barcode
+        description: "Штрихкод поставляемого товара"
+      - name: nm_id
+        description: "Артикул Wildberries"
+      - name: quantity
+        description: "Количество товара в поставке"
+      - name: total_price
+        description: "Общая стоимость поставки"
+      - name: status
+        description: "Текущий статус поставки (Принято, В пути и т.д.)"
+      - name: warehouse_name
+        description: "Целевой склад поставки"

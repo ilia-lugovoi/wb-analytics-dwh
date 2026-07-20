@@ -1,0 +1,21 @@
+select
+    dag_date as date,
+    barcode,
+    nm_id,
+    supplier_article,
+    subject,
+    brand,
+    category,
+    warehouse_name,
+    quantity,
+    quantity_full,
+    quantity_not_in_orders,
+    price,
+    discount,
+    in_way_to_client,
+    in_way_from_client,
+    days_on_site,
+    is_supply,
+    is_realization,
+    sc_code
+from {{ ref('stg_stock') }}

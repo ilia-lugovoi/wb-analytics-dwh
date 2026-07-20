@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Первичные очищенные данные по заказам (Wildberries)"
+    columns:
+      - name: id
+        description: "Внутренний технический ID строки"
+        tests:
+          - unique
+          - not_null
+      - name: odid
+        description: "Уникальный идентификатор заказа (бизнес-ключ)"
+        tests:
+          - not_null
+      - name: date
+        description: "Дата и время фиксации заказа"
+      - name: barcode
+        description: "Штрихкод товара"
+      - name: total_price
+        description: "Финальная стоимость заказа"
+
+  - name: stg_sales
+    description: "Первичные очищенные данные по продажам (факты выкупа товара)"
+    columns:
+      - name: id
+        description: "Внутренний технический ID строки"
+        tests:
+          - unique
+          - not_null
+      - name: sale_id
+        description: "Уникальный идентификатор продажи"
+        tests:
+          - not_null
+      - name: odid
+        description: "Связующий ID заказа, по которому произошел выкуп"
+      - name: date
+        description: "Дата и время продажи"
+
+  - name: stg_sales_report
+    description: "Отчеты о реализации (финансовые документы от маркетплейса)"
+    columns:
+      - name: id
+        description: "Внутренний технический ID строки"
+        tests:
+          - unique
+          - not_null
+      - name: realizationreport_id
+        description: "Номер отчета о реализации"
+      - name: rid
+        description: "Уникальный идентификатор операции в отчете"
+      - name: barcode
+        description: "Штрихкод проданного товара"
+
+  - name: stg_stock
+    description: "Текущие и исторические остатки товаров на складах"
+    columns:
+      - name: id
+        description: "Внутренний технический ID строки"
+        tests:
+          - unique
+          - not_null
+      - name: barcode
+        description: "Штрихкод товара на остатках"
+      - name: quantity
+        description: "Количество товара доступное к продаже"
+      - name: dag_date
+        description: "Дата среза остатков"
+
+  - name: stg_supplies
+    description: "Данные по поставкам товаров на склады"
+    columns:
+      - name: id
+        description: "Внутренний технический ID строки"
+        tests:
+          - unique
+          - not_null
+      - name: income_id
+        description: "Идентификатор поставки"
+      - name: date
+        description: "Дата приемки поставки"
+      - name: barcode
+        description: "Штрихкод поставляемого товара"

@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: raw_sources
+    database: wb_analytics
+    schema: raw
+    tables:
+      - name: raw_orders
+      - name: raw_sales
+      - name: raw_sales_report
+      - name: raw_stock
+      - name: raw_supplies

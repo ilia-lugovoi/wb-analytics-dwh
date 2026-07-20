@@ -1,0 +1,7 @@
+﻿logs
+target
+dbt_modules
+dbt_packages
+profiles.yml
+.user.yml
+*.pbix.tmp
