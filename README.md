@@ -6,7 +6,7 @@
 ## Технологии
 
 ### Архитектура данных
-PostgreSQL, Python (Pandas, os, sqlalchemy), dbt, Docker, Power Query (PBI)
+PostgreSQL, dbt, Docker, Power Query (PBI)
 
 ### BI-решение
 Power BI (DAX)
