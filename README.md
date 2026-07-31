@@ -1,3 +1,11 @@
+# Archived.
+
+This project was my first implementation of Wildberries analytics.
+
+A production-ready version is available here:
+
+wildberries-seller
+
 # Аналитическая система (DWH) и Управленческий BI-дашборд для маркетплейса Wildberries
 
 ## Цель проекта
